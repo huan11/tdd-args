@@ -1,5 +1,6 @@
 plugins {
-    id("java")
+    `java-library`
+    "jacoco"
 }
 
 group = "org.example"
@@ -10,10 +11,20 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation("jakarta.inject:jakarta.inject-api:2.0.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-runner:1.8.2")
+    testImplementation("org.mockito:mockito-core:4.3.1")
+    testImplementation("jakarta.inject:jakarta.inject-tck:2.0.1")
 }
 
-tasks.test {
+tasks.withType<Test>() {
     useJUnitPlatform()
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
