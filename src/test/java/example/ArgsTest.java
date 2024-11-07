@@ -9,7 +9,7 @@ public class ArgsTest {
         // Show how to use
         options.logging();
         options.port();
-        options.directroy();
+        options.directory();
     }
 
     static record Options(@Option("-l") boolean logging, @Option("-p") int port, @Option("-d") String directory) {
