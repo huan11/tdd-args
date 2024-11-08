@@ -10,9 +10,9 @@
 
    * 输入：
 
-     `-l -p 8080 -d /usr/logs`
+     样例一： `-l -p 8080 -d /usr/logs`
 
-     `-g this is a list -d 1 2-3 5`
+     样例二：`-g this is a list -d 1 2-3 5`
 
    * 输出：
 
@@ -59,21 +59,43 @@
 
    
 
-   有没有什么通过一步，两步，三步这样的方式进行开发？
+   有没有什么通过一步，两步，三步这样的方式进行开发？并且让我们的第一个测试尽快通过测试？
 
-   简单情况
+   * 考虑  happy path
+
+     * 分而治之，分解成单独的任务
+     * 合并
+
+   * 考虑 Sad Path
+
+   * 考虑 default value
+     ![image-20240926075358356](./img/image-20240926075358356.png)
 
 6. 产出任务列表
 
+   大概10个测试的样子，到第四个测试的时候，我们要的第一个功能从正向来看就实现了
+
+   ![image-20240926075820299](./img/image-20240926075820299.png)
 
 
 
+```
+// Single Option:
+// TODO:      - Bool -l
+// TODO:      - Integer -p 8080
+// TODO:      - String -d /usr/logs
+// TODO:      - multi options: -l -p 8080 -d /usr/logs
 
+// sad path:
+// TODO:      - bool -l t / -l t f
+// TODO:      - int -p / -p 8080 8081
+// TODO:      - string -d / -d /usr/logs /usr/vars
 
-
-
-
-
+// default value
+// TODO:      - bool : false
+// TODO:      - int : 0
+// TODO:      - string ""
+```
 
 
 
