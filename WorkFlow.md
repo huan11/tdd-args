@@ -106,7 +106,7 @@ TDD 是通过一系列的测试控制我们整个研发的节奏，所以我们�
 
 
 
-## 进入红绿重构循环
+## 进入First 红绿重构循环
 
 3 Status:
 
@@ -156,15 +156,33 @@ TDD 是通过一系列的测试控制我们整个研发的节奏，所以我们�
 
 
 
-## Green
+### Green
 
 ![image-20241108213715401](./img/image-20241108213715401.png)
 
 
 
+## Update Task List
+
+Mark the Task as finished
+
+- // Single Option:
+  * ~~// TODO:      - Bool -l~~
+  * **// TODO:      - Integer -p 8080**
+  * // TODO:      - String -d /usr/logs
+  * // TODO:      - multi options: -l -p 8080 -d /usr/logs
+- // sad path:
+  - // TODO:      - bool -l t / -l t f
+  - // TODO:      - int -p / -p 8080 8081
+  - // TODO:      - string -d / -d /usr/logs /usr/vars
+- // default value
+  * // TODO:      - bool : false
+  * // TODO:      - int : 0
+  * // TODO:      - string ""
 
 
 
+## 进入First 红绿重构循环
 
 
 

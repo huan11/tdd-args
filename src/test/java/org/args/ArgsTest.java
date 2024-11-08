@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ArgsTest {
     // Single Option:
-    // TODO:      - Bool -l
     static record BooleanOption(@Option("l")boolean logging){}
     @Test
     public void should_set_boolean_option_to_true_if_flag_present() {
@@ -20,11 +19,6 @@ public class ArgsTest {
         BooleanOption options = Args.parse(BooleanOption.class);
         assertFalse(options.logging());
     }
-
-
-
-
-
 
     // TODO:      - Integer -p 8080
     // TODO:      - String -d /usr/logs
