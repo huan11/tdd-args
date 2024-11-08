@@ -13,11 +13,9 @@ public class Args {
             // get first constructor（eg:for boolean record, it shld be public BooleanOption(@Option("l")boolean logging){ ）
             Constructor<?> constructor = optionsClass.getDeclaredConstructors()[0];
 
-            // get first parameter of constructor (eg: @Option("l")boolean logging)
-            Parameter parameter = constructor.getParameters()[0];
+            Object[] values = Arrays.stream(constructor.getParameters()).map((it) -> parseOption(it, arguments)).toArray();
 
-            Object value = parseOption(parameter, arguments);
-            return (T) constructor.newInstance(value);
+            return (T) constructor.newInstance(values);
         }catch (Exception e){
             throw new RuntimeException(e);
         }
