@@ -29,6 +29,14 @@ public class ArgsTest {
         assertEquals(8080, option.port());
     }
     // TODO:      - String -d /usr/logs
+    static record StringOption(@Option("d") String directory){}
+    @Test
+    public void should_parse_string_as_option_value(){
+        // execute
+        StringOption option = Args.parse(StringOption.class, "-d", "/usr/logs");
+        // assert
+        assertEquals("/usr/logs", option.directory());
+    }
     // TODO:      - multi options: -l -p 8080 -d /usr/logs
 
     // sad path:
