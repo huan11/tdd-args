@@ -37,7 +37,7 @@ public class ArgsTest {
         // assert
         assertEquals("/usr/logs", option.directory());
     }
-    // TODO:      - multi options: -l -p 8080 -d /usr/logs
+
     static record MultiOptions(@Option("l") boolean logging, @Option("p") int port, @Option("d") String directory) {
     }
     @Test
