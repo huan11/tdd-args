@@ -18,7 +18,11 @@ public class Args {
 
             List<String> arguments = Arrays.asList(args);
 
-            boolean value = arguments.contains("-" + option.value());
+            Object value = null;
+
+            if (parameter.getType() == boolean.class){
+                value = arguments.contains("-" + option.value());
+            }
             return (T) constructor.newInstance(value);
         }catch (Exception e){
             throw new RuntimeException(e);
