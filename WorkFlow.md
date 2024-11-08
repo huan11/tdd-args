@@ -97,9 +97,44 @@ TDD 是通过一系列的测试控制我们整个研发的节奏，所以我们�
 // TODO:      - string ""
 ```
 
+## Before 进入红绿重构循环
+
+1. Disable example test
+2. Make the code pass compilation quickly.
+
+
+
 
 
 ## 进入红绿重构循环
+
+3 Status:
+
+* TODO 
+* ~~xxxTask~~  Finished
+* **// TODO:  XXX** in progress
+
+
+
+任务列表
+
+> // Single Option:
+> **// TODO:      - Bool -l**
+> // TODO:      - Integer -p 8080
+> // TODO:      - String -d /usr/logs
+> // TODO:      - multi options: -l -p 8080 -d /usr/logs
+>
+> // sad path:
+> // TODO:      - bool -l t / -l t f
+> // TODO:      - int -p / -p 8080 8081
+> // TODO:      - string -d / -d /usr/logs /usr/vars
+>
+> // default value
+> // TODO:      - bool : false
+> // TODO:      - int : 0
+> // TODO:      - string ""
+
+
 
 
 

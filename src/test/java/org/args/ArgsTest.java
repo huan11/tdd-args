@@ -1,6 +1,7 @@
-package example;
+package org.args;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -24,6 +25,7 @@ public class ArgsTest {
 
     // example1 `-l -p 8080 -d /usr/logs`
     @Test
+    @Disabled
     public void should_example1(){
         Options options = Args.parse(Options.class, "-l", "-p", "8080", "-d", "/use/logs");
         assertTrue(options.logging());
@@ -33,6 +35,7 @@ public class ArgsTest {
 
     // example2 `-g this is a list -d 1 2 -3 5` GPT 生成
     @Test
+    @Disabled
     public void should_example2() {
         // 解析输入命令行参数
         ListOption option = Args.parse(ListOption.class, "-g", "this", "is", "a", "list", "-d", "1", "2", "-3", "5");

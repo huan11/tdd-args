@@ -3,7 +3,7 @@ plugins {
     "jacoco"
 }
 
-group = "org.example"
+group = "org.args"
 version = "1.0-SNAPSHOT"
 
 repositories {
