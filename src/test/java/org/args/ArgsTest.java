@@ -38,7 +38,13 @@ public class ArgsTest {
         assertEquals("/usr/logs", option.directory());
     }
     // TODO:      - multi options: -l -p 8080 -d /usr/logs
-
+    @Test
+    public void should_parse_multi_options(){
+        Options options = Args.parse(Options.class, "-l", "-p", "8080", "-d", "/use/logs");
+        assertTrue(options.logging());
+        assertEquals(8080, options.port());
+        assertEquals("/use/logs", options.directory());
+    }
     // sad path:
     // TODO:      - bool -l t / -l t f
     // TODO:      - int -p / -p 8080 8081
@@ -49,15 +55,6 @@ public class ArgsTest {
     // TODO:      - int : 0
     // TODO:      - string ""
 
-    // example1 `-l -p 8080 -d /usr/logs`
-    @Test
-    @Disabled
-    public void should_example1(){
-        Options options = Args.parse(Options.class, "-l", "-p", "8080", "-d", "/use/logs");
-        assertTrue(options.logging());
-        assertEquals(8080, options.port());
-        assertEquals("/use/logs", options.directory());
-    }
 
     // example2 `-g this is a list -d 1 2 -3 5` GPT 生成
     @Test
