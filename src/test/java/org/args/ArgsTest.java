@@ -21,6 +21,14 @@ public class ArgsTest {
     }
 
     // TODO:      - Integer -p 8080
+    static record IntOption(@Option("p") int port){}
+    @Test
+    public void should_parse_int_as_option_value(){
+        // execute
+        IntOption option = Args.parse(IntOption.class, "-p", "8080");
+        // assert option value shld be equal to 8080
+        assertEquals(8080, option.port());
+    }
     // TODO:      - String -d /usr/logs
     // TODO:      - multi options: -l -p 8080 -d /usr/logs
 
