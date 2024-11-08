@@ -28,7 +28,7 @@ public class ArgsTest {
         // assert option value shld be equal to 8080
         assertEquals(8080, option.port());
     }
-    // TODO:      - String -d /usr/logs
+
     static record StringOption(@Option("d") String directory){}
     @Test
     public void should_parse_string_as_option_value(){
