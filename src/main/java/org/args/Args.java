@@ -21,7 +21,13 @@ public class Args {
             Object value = null;
 
             if (parameter.getType() == boolean.class){
+                // If the flag is present, the value is true, otherwise false
                 value = arguments.contains("-" + option.value());
+            }
+            if (parameter.getType() == int.class) {
+                // First query the index of the flag ,then get the value and ensure it is an integer
+                int index = arguments.indexOf("-" + option.value());
+                value = Integer.parseInt(arguments.get(index + 1));
             }
             return (T) constructor.newInstance(value);
         }catch (Exception e){
