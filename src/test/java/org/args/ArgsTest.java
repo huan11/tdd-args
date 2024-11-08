@@ -20,7 +20,6 @@ public class ArgsTest {
         assertFalse(options.logging());
     }
 
-    // TODO:      - Integer -p 8080
     static record IntOption(@Option("p") int port){}
     @Test
     public void should_parse_int_as_option_value(){
