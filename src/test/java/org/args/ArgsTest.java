@@ -3,8 +3,7 @@ package org.args;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ArgsTest {
     // Single Option:
@@ -13,6 +12,11 @@ public class ArgsTest {
     public void should_set_boolean_option_to_true_if_flag_present() {
         BooleanOption options = Args.parse(BooleanOption.class, "-l");
         assertTrue(options.logging());
+    }
+    @Test
+    public void should_set_boolean_option_to_false_if_flag_not_present() {
+        BooleanOption options = Args.parse(BooleanOption.class);
+        assertFalse(options.logging());
     }
     static record BooleanOption(@Option("-l")boolean logging){}
 
