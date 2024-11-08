@@ -38,9 +38,11 @@ public class ArgsTest {
         assertEquals("/usr/logs", option.directory());
     }
     // TODO:      - multi options: -l -p 8080 -d /usr/logs
+    static record MultiOptions(@Option("l") boolean logging, @Option("p") int port, @Option("d") String directory) {
+    }
     @Test
     public void should_parse_multi_options(){
-        Options options = Args.parse(Options.class, "-l", "-p", "8080", "-d", "/use/logs");
+        MultiOptions options = Args.parse(MultiOptions.class, "-l", "-p", "8080", "-d", "/use/logs");
         assertTrue(options.logging());
         assertEquals(8080, options.port());
         assertEquals("/use/logs", options.directory());
@@ -71,7 +73,6 @@ public class ArgsTest {
     }
 
 
-    static record Options(@Option("-l") boolean logging, @Option("-p") int port, @Option("-d") String directory) {
-    }
+
     static record ListOption(@Option("-g") String[] group, @Option("-d") int[] decimals){}
 }
