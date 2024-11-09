@@ -62,7 +62,8 @@ public class Args {
     static class BooleanParser implements OptionParser{
         @Override
         public Object parse(List<String> arguments, Option option) {
-            return parseBoolean(arguments, option);
+            // If the flag is present, the value is true, otherwise false
+            return arguments.contains("-" + option.value());
         }
     }
 }
