@@ -56,7 +56,7 @@ public class Args {
 
     private static Object parseBoolean(List<String> arguments, Option option) {
         // If the flag is present, the value is true, otherwise false
-        return arguments.contains("-" + option.value());
+        return new BooleanParser().parse(arguments, option);
     }
 
     static class BooleanParser implements OptionParser{
