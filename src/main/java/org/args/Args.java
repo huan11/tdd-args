@@ -30,7 +30,7 @@ public class Args {
 
         if (parameter.getType() == boolean.class){
             // If the flag is present, the value is true, otherwise false
-            BooleanParser parser = new BooleanParser();
+            OptionParser parser = new BooleanParser();
             value = parser.parse(arguments, option);
         }
         if (parameter.getType() == int.class) {
