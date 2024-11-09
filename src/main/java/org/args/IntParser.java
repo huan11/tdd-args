@@ -7,6 +7,7 @@ class IntParser implements OptionParser {
     public Object parse(List<String> arguments, Option option) {
         // First query the index of the flag ,then get the value and ensure it is an integer
         int index = arguments.indexOf("-" + option.value());
-        return Integer.parseInt(arguments.get(index + 1));
+        String value = arguments.get(index + 1);
+        return Integer.parseInt(value);
     }
 }
