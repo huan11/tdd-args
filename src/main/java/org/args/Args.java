@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Args {
 
@@ -27,18 +28,13 @@ public class Args {
         return getOptionParser(parameter.getType()).parse(arguments, parameter.getAnnotation(Option.class));
     }
 
+    private static Map<Class<?>, OptionParser> PARSERS = Map.of(
+            boolean.class, new BooleanParser(),
+            int.class, new IntParser(),
+            String.class, new StringParser()
+    );
     private static OptionParser getOptionParser(Class<?> type) {
-        OptionParser parser = null;
-        if (type == boolean.class){
-            parser = new BooleanParser();
-        }
-        if (type == int.class) {
-            parser = new IntParser();
-        }
-        if (type == String.class){
-            parser = new StringParser();
-        }
-        return parser;
+        return PARSERS.get(type);
     }
 
     interface OptionParser{
