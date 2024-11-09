@@ -29,18 +29,39 @@ public class Args {
 
 
         if (parameter.getType() == boolean.class){
-            // If the flag is present, the value is true, otherwise false
-            value = arguments.contains("-" + option.value());
+            value = parseBoolean(arguments, option);
         }
         if (parameter.getType() == int.class) {
-            // First query the index of the flag ,then get the value and ensure it is an integer
-            int index = arguments.indexOf("-" + option.value());
-            value = Integer.parseInt(arguments.get(index + 1));
+            value = parseInt(arguments, option);
         }
         if (parameter.getType() == String.class){
-            int index = arguments.indexOf("-" + option.value());
-            value = arguments.get(index + 1);
+            value = parseString(arguments, option);
         }
+        return value;
+    }
+
+    interface OptionParser{
+        Object parse(List<String> arguments, Option option);
+    }
+    private static Object parseString(List<String> arguments, Option option) {
+        Object value;
+        int index = arguments.indexOf("-" + option.value());
+        value = arguments.get(index + 1);
+        return value;
+    }
+
+    private static Object parseInt(List<String> arguments, Option option) {
+        Object value;
+        // First query the index of the flag ,then get the value and ensure it is an integer
+        int index = arguments.indexOf("-" + option.value());
+        value = Integer.parseInt(arguments.get(index + 1));
+        return value;
+    }
+
+    private static Object parseBoolean(List<String> arguments, Option option) {
+        Object value;
+        // If the flag is present, the value is true, otherwise false
+        value = arguments.contains("-" + option.value());
         return value;
     }
 }
