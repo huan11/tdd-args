@@ -7,9 +7,4 @@ class StringParser extends IntParser {
     public StringParser() {
         super(String::valueOf);
     }
-
-    @Override
-    protected  String parseValue(String value) {
-        return String.valueOf(value);
-    }
 }
