@@ -6,6 +6,6 @@ class StringParser extends IntParser {
     }
 
     public static OptionParser createStringParser() {
-        return new StringParser();
+        return new IntParser(String::valueOf);
     }
 }
