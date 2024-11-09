@@ -1,6 +1,7 @@
 package org.args;
 
 import java.util.List;
+import java.util.function.Function;
 
 class IntParser implements OptionParser {
     @Override
@@ -11,6 +12,7 @@ class IntParser implements OptionParser {
     }
 
     protected Object parseValue(String value) {
-        return Integer.parseInt(value);
+        Function<String, Integer> valueParser = value1 -> Integer.parseInt(value1);
+        return valueParser.apply(value);
     }
 }
