@@ -6,6 +6,13 @@ import java.util.function.Function;
 class IntParser implements OptionParser {
     Function<String, Object> valueParser = Integer::parseInt;
 
+    public IntParser() {
+    }
+
+    public IntParser(Function<String, Object> valueParser) {
+        this.valueParser = valueParser;
+    }
+
     @Override
     public Object parse(List<String> arguments, Option option) {
         int index = arguments.indexOf("-" + option.value());
