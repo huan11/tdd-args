@@ -24,8 +24,7 @@ public class Args {
     }
 
     private static Object parseOption(Parameter parameter, List<String> arguments) {
-        // get annotation of first parameter(eg: @Option("l"))
-        return getOptionParser(parameter.getType()).parse(arguments, parameter.getAnnotation(Option.class));
+        return PARSERS.get(parameter.getType()).parse(arguments, parameter.getAnnotation(Option.class));
     }
 
     private static Map<Class<?>, OptionParser> PARSERS = Map.of(
@@ -33,9 +32,6 @@ public class Args {
             int.class, new IntParser(),
             String.class, new StringParser()
     );
-    private static OptionParser getOptionParser(Class<?> type) {
-        return PARSERS.get(type);
-    }
 
     interface OptionParser{
         Object parse(List<String> arguments, Option option);
