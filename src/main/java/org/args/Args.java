@@ -29,7 +29,8 @@ public class Args {
 
 
         if (parameter.getType() == boolean.class){
-            value = parseBoolean(arguments, option);
+            // If the flag is present, the value is true, otherwise false
+            value = new BooleanParser().parse(arguments, option);
         }
         if (parameter.getType() == int.class) {
             value = parseInt(arguments, option);
@@ -65,11 +66,6 @@ public class Args {
             int index = arguments.indexOf("-" + option.value());
             return Integer.parseInt(arguments.get(index + 1));
         }
-    }
-
-    private static Object parseBoolean(List<String> arguments, Option option) {
-        // If the flag is present, the value is true, otherwise false
-        return new BooleanParser().parse(arguments, option);
     }
 
     static class BooleanParser implements OptionParser{
