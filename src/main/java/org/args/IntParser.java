@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Function;
 
 class IntParser implements OptionParser {
-    Function<String, Object> valueParser = Integer::parseInt;
+    Function<String, Object> valueParser;
 
     public IntParser(Function<String, Object> valueParser) {
         this.valueParser = valueParser;
