@@ -27,9 +27,13 @@ public class Args {
         Option option = parameter.getAnnotation(Option.class);
 
         Class<?> type = parameter.getType();
+        OptionParser parser = getOptionParser(type);
+        return parser.parse(arguments, option);
+    }
+
+    private static OptionParser getOptionParser(Class<?> type) {
         OptionParser parser = null;
         if (type == boolean.class){
-            // If the flag is present, the value is true, otherwise false
             parser = new BooleanParser();
         }
         if (type == int.class) {
@@ -38,7 +42,7 @@ public class Args {
         if (type == String.class){
             parser = new StringParser();
         }
-        return parser.parse(arguments, option);
+        return parser;
     }
 
     interface OptionParser{
