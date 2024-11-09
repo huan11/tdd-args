@@ -10,10 +10,6 @@ class IntParser implements OptionParser {
         this.valueParser = valueParser;
     }
 
-    public static OptionParser createIntParser() {
-        return new IntParser(Integer::parseInt);
-    }
-
     @Override
     public Object parse(List<String> arguments, Option option) {
         int index = arguments.indexOf("-" + option.value());
