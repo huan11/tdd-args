@@ -33,10 +33,10 @@ public class Args {
             value = new BooleanParser().parse(arguments, option);
         }
         if (parameter.getType() == int.class) {
-            value = parseInt(arguments, option);
+            value = new IntParser().parse(arguments, option);
         }
         if (parameter.getType() == String.class){
-            value = parseString(arguments, option);
+            value = new StringParser().parse(arguments, option);
         }
         return value;
     }
@@ -44,19 +44,13 @@ public class Args {
     interface OptionParser{
         Object parse(List<String> arguments, Option option);
     }
-    private static Object parseString(List<String> arguments, Option option) {
-        return new StringParser().parse(arguments, option);
-    }
+
     static class StringParser implements OptionParser{
         @Override
         public Object parse(List<String> arguments, Option option) {
             int index = arguments.indexOf("-" + option.value());
             return arguments.get(index + 1);
         }
-    }
-
-    private static Object parseInt(List<String> arguments, Option option) {
-        return new IntParser().parse(arguments, option);
     }
 
     static class IntParser implements OptionParser{
