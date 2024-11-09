@@ -10,7 +10,7 @@ class IntParser implements OptionParser {
         return parseValue(value);
     }
 
-    private static int parseValue(String value) {
+    protected static int parseValue(String value) {
         return Integer.parseInt(value);
     }
 }
