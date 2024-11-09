@@ -23,25 +23,21 @@ public class Args {
     }
 
     private static Object parseOption(Parameter parameter, List<String> arguments) {
-        Object value = null;
         // get annotation of first parameter(eg: @Option("l"))
         Option option = parameter.getAnnotation(Option.class);
 
-
+        OptionParser parser = null;
         if (parameter.getType() == boolean.class){
             // If the flag is present, the value is true, otherwise false
-            OptionParser parser = new BooleanParser();
-            value = parser.parse(arguments, option);
+            parser = new BooleanParser();
         }
         if (parameter.getType() == int.class) {
-            OptionParser parser = new IntParser();
-            value = parser.parse(arguments, option);
+            parser = new IntParser();
         }
         if (parameter.getType() == String.class){
-            OptionParser parser = new StringParser();
-            value = parser.parse(arguments, option);
+            parser = new StringParser();
         }
-        return value;
+        return parser.parse(arguments, option);
     }
 
     interface OptionParser{
