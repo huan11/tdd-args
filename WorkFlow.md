@@ -259,3 +259,43 @@ Mark the Task as finished
 
  
 
+## 更新任务列表
+
+Mark the Task as finished
+
+- // Single Option:
+  * ~~// TODO:      - Bool -l~~
+  * ~~// TODO:      - Integer -p 8080~~
+  * ~~// TODO:      - String -d /usr/logs~~
+  * ~~// TODO:      - multi options: -l -p 8080 -d /usr/logs~~
+- // sad path:
+  - // TODO:      - bool -l t / -l t f
+  - // TODO:      - int -p / -p 8080 8081
+  - // TODO:      - string -d / -d /usr/logs /usr/vars
+- // default value
+  * // TODO:      - bool : false
+  * // TODO:      - int : 0
+  * // TODO:      - string ""
+
+## 调整任务列表
+
+架构调整了，任务列表也要跟着动
+
+![img](./img/6bf1a4e2548e5139a021278ddc0d53de.jpg)
+
+* BooleanOptionParserTest
+  * // sad path:
+    // TODO: -bool -l t / -l t f
+  * // default:
+    // TODO: - bool : false
+
+* SingleValuedOptionParserTest
+  * // sad path:
+    // TODO: - int -p/ -p 8080 8081
+    // TODO: - string -d/ -d /usr/logs /usr/vars
+  * // default value:
+    // TODO: -int :0
+    // TODO: - string ""
+
+
+
