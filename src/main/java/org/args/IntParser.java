@@ -13,7 +13,7 @@ class IntParser implements OptionParser {
         this.valueParser = valueParser;
     }
 
-    public static IntParser createIntParser() {
+    public static OptionParser createIntParser() {
         return new IntParser();
     }
 
