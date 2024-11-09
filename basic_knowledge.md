@@ -33,3 +33,36 @@ public @interface Option {
 
 ## TODO java 9 引入的 map.of
 
+
+
+## TODO java 语法 Integer::parseInt
+
+
+
+## TODO 思考
+
+为什么说是多余的？
+
+> Variable 'name' initializer '"zhangsan"' is redundant 
+>  Inspection info: Reports assignment values that are not used after assignment. If the assignment value is unused, it's better to remove the assignment to shorten the code and avoid redundant allocations.
+> The following cases are reported:
+> variables that are never read after assignment
+> variables that are always overwritten with a new value before being read
+> variable initializers that are redundant (for one of the two reasons above)
+
+![image-20241109203517458](./img/image-20241109203517458.png)
+
+```
+class Demo{
+    private String name = "zhangsan";
+//    private Demo() {
+//    }
+
+    public Demo(String name) {
+        this.name = name;
+    }
+
+    public static Demo createDemo() {
+        return new Demo("2");
+    }
+}

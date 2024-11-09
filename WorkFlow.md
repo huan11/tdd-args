@@ -226,3 +226,36 @@ Mark the Task as finished
 去掉手术台，改变代码调用链路。
 
 ![image-20241109153145917](./img/image-20241109153145917.png)
+
+
+
+## 开始重构2 -- 代码结构的重复 
+
+解决方案：
+
+1. 策略模式 Stratege pattern 
+2. 利用函数式编程 
+   1. 把String.valueOf(value); 变成 function field
+
+
+
+能不能把父类中别被子类覆盖的方法删掉呢？
+
+1. 把父类中别被子类覆盖的方法的主体提取成一个 Field （Extract Funtional Field）
+   ![image-20241109192038971](./img/image-20241109192038971.png)
+
+2. ...
+
+3. 方式1:
+   最后使用 StringParser 的地方可以用 New IntParser() 的方式书写，然后把 函数（String::valueOf）传过去，这样，就合二为一了。
+   ![image-20241109195220636](./img/image-20241109195220636.png)
+
+   
+
+   方式2:
+   将构造函数变成工厂方法
+   https://www.jetbrains.com/help/idea/replace-constructor-with-factory-method.html
+   
+
+ 
+
