@@ -34,11 +34,11 @@ public class Args {
             value = parser.parse(arguments, option);
         }
         if (parameter.getType() == int.class) {
-            IntParser parser = new IntParser();
+            OptionParser parser = new IntParser();
             value = parser.parse(arguments, option);
         }
         if (parameter.getType() == String.class){
-            StringParser parser = new StringParser();
+            OptionParser parser = new StringParser();
             value = parser.parse(arguments, option);
         }
         return value;
