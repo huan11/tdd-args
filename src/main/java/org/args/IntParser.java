@@ -6,9 +6,6 @@ import java.util.function.Function;
 class IntParser implements OptionParser {
     Function<String, Object> valueParser = Integer::parseInt;
 
-    private IntParser() {
-    }
-
     public IntParser(Function<String, Object> valueParser) {
         this.valueParser = valueParser;
     }
