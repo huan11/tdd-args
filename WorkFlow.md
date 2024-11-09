@@ -182,13 +182,47 @@ Mark the Task as finished
 
 
 
-## 进入First 红绿重构循环
+## 进入后续红绿重构循环
+
+注意：
+
+1. 如何写测试的时候就不要动生产代码
+2. 如何写生产代码的时候就
+
+## 考虑是否要进行重构？
+
+进入重构的条件：
+
+1. 第一是测试都是绿的，也就是当前功能正常（Green）
+1. 第二是坏味道足够明显。（Bad Smell）
 
 
 
-  
+当前代码是否满足两个条件
+
+1. green ✅
+2. bad smell ✅
+   1. 一个明显的面向对象误用的坏味道——分支语句（Switch Statements、Object-Oriented Abusers）
+      重构手法：利用多态替换条件分支（Replacing Conditional with Polymorphism）
 
 
 
 
 
+利用多态替换条件分支（Replacing Conditional with Polymorphism）
+
+
+
+## 开始重构
+
+1. 设计
+
+2. delegate 然后 inline 旧实现
+
+![image-20241109152903666](./img/image-20241109152903666.png)
+
+
+
+去掉手术台，改变代码调用链路。
+
+![image-20241109153145917](./img/image-20241109153145917.png)
