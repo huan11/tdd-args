@@ -26,15 +26,16 @@ public class Args {
         // get annotation of first parameter(eg: @Option("l"))
         Option option = parameter.getAnnotation(Option.class);
 
+        Class<?> type = parameter.getType();
         OptionParser parser = null;
-        if (parameter.getType() == boolean.class){
+        if (type == boolean.class){
             // If the flag is present, the value is true, otherwise false
             parser = new BooleanParser();
         }
-        if (parameter.getType() == int.class) {
+        if (type == int.class) {
             parser = new IntParser();
         }
-        if (parameter.getType() == String.class){
+        if (type == String.class){
             parser = new StringParser();
         }
         return parser.parse(arguments, option);
