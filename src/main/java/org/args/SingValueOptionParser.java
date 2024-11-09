@@ -3,15 +3,15 @@ package org.args;
 import java.util.List;
 import java.util.function.Function;
 
-class SingValueOptionParser implements OptionParser {
-    Function<String, Object> valueParser;
+class SingValueOptionParser<T> implements OptionParser {
+    Function<String, T> valueParser;
 
-    public SingValueOptionParser(Function<String, Object> valueParser) {
+    public SingValueOptionParser(Function<String, T> valueParser) {
         this.valueParser = valueParser;
     }
 
     @Override
-    public Object parse(List<String> arguments, Option option) {
+    public T parse(List<String> arguments, Option option) {
         int index = arguments.indexOf("-" + option.value());
         String value = arguments.get(index + 1);
 
