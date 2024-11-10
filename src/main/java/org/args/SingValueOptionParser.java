@@ -21,9 +21,8 @@ class SingValueOptionParser<T> implements OptionParser<T> {
     @Override
     public T parse(List<String> arguments, Option option) {
         Optional<List<String>> argumentList;
-        int expectedSize = 1;
 
-        argumentList = values(arguments, option, expectedSize);
+        argumentList = values(arguments, option, 1);
 
         return argumentList.map(it -> parseValue(it.get(0))).orElse(defaultValue);
     }
