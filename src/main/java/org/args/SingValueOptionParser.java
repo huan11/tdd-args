@@ -48,7 +48,7 @@ class SingValueOptionParser<T> implements OptionParser<T> {
         return Optional.of(values);
     }
 
-    private T parseValue(String value, Function<String, T> valueParser) {
+    private static <T> T parseValue(String value, Function<String, T> valueParser) {
         return valueParser.apply(value);
     }
 
