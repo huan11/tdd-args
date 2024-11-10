@@ -8,15 +8,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
-class SingValueOptionParser<T> implements OptionParser<T> {
-    Function<String, T> valueParser;
-    T defaultValue;
-
-    private SingValueOptionParser(T defaultValue, Function<String, T> valueParser) {
-        this.defaultValue = defaultValue;
-        this.valueParser = valueParser;
-    }
-
+class SingValueOptionParser {
     public static OptionParser<Boolean> bool() {
         return ((arguments, option) ->
                 values(arguments, option, 0).map(it -> true).orElse(false));
@@ -26,12 +18,6 @@ class SingValueOptionParser<T> implements OptionParser<T> {
         return ((arguments, option) -> values(arguments, option, 1).map(it -> parseValue(it.get(0), valueParser)).orElse(defaultValue));
     }
 
-
-    @Override
-    public T parse(List<String> arguments, Option option) {
-
-        return values(arguments, option, 1).map(it -> parseValue(it.get(0), valueParser)).orElse(defaultValue);
-    }
 
     private static Optional<List<String>> values(List<String> arguments, Option option, int expectedSize) {
         int index = arguments.indexOf("-" + option.value());
