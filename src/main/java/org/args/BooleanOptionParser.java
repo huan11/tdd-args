@@ -1,5 +1,6 @@
 package org.args;
 
+import org.args.exceptions.InsufficientArgumentsException;
 import org.args.exceptions.TooManyArgumentsException;
 
 import java.util.List;
@@ -14,6 +15,7 @@ class BooleanOptionParser implements OptionParser<Boolean> {
         List<String> values = SingValueOptionParser.getValuesBetweenCurrentAndNextFlag(arguments, index);
 
         // 考虑越界的问题
+        if (values.size() < 0) throw new InsufficientArgumentsException(option.value());
         if (values.size() > 0) throw new TooManyArgumentsException(option.value());
         return true;
     }
