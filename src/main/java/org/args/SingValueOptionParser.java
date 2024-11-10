@@ -12,7 +12,7 @@ class SingValueOptionParser<T> implements OptionParser<T> {
     Function<String, T> valueParser;
     T defaultValue;
 
-    public SingValueOptionParser(T defaultValue, Function<String, T> valueParser) {
+    private SingValueOptionParser(T defaultValue, Function<String, T> valueParser) {
         this.defaultValue = defaultValue;
         this.valueParser = valueParser;
     }
@@ -20,6 +20,10 @@ class SingValueOptionParser<T> implements OptionParser<T> {
     public static OptionParser<Boolean> bool() {
         return ((arguments, option) ->
                 values(arguments, option, 0).map(it -> true).orElse(false));
+    }
+
+    public static <T> OptionParser<T> createSingValueOptionParser(T defaultValue, Function<String, T> valueParser) {
+        return new SingValueOptionParser<T>(defaultValue, valueParser);
     }
 
 

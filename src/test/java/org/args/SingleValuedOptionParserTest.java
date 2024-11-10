@@ -19,7 +19,7 @@ public class SingleValuedOptionParserTest {
         // Assert
         TooManyArgumentsException e = assertThrows(TooManyArgumentsException.class, () -> {
             // Act
-            new SingValueOptionParser<Integer>(0, Integer::parseInt).parse(asList("-p", "8080", "8081"), option("p"));
+            SingValueOptionParser.createSingValueOptionParser(0, Integer::parseInt).parse(asList("-p", "8080", "8081"), option("p"));
         });
 
         // Assert
@@ -32,7 +32,7 @@ public class SingleValuedOptionParserTest {
         // Assert
         InsufficientArgumentsException e = assertThrows(InsufficientArgumentsException.class, () -> {
             // Act
-            new SingValueOptionParser<Integer>(0, Integer::parseInt).parse(asList(arguments.split(" ")), option("p"));
+            SingValueOptionParser.createSingValueOptionParser(0, Integer::parseInt).parse(asList(arguments.split(" ")), option("p"));
         });
 
         // Assert
@@ -47,7 +47,7 @@ public class SingleValuedOptionParserTest {
         // 任意的 default value
         Object defaultValue = new Object();
         // 意图更加明显，无论你是啥，保证最终的 defaultValue 一致，和 任何具体的 parser 实现whatever 没有关系
-        assertEquals(defaultValue, new SingValueOptionParser<>(defaultValue, whatever).parse(asList(), option("p")));
+        assertEquals(defaultValue, SingValueOptionParser.createSingValueOptionParser(defaultValue, whatever).parse(asList(), option("p")));
     }
 
     @Test // Happy path
@@ -55,6 +55,6 @@ public class SingleValuedOptionParserTest {
         Object parsed = new Object();
         Function<String, Object> parse = (it) -> parsed;
         Object whatever = new Object();
-        assertEquals(parsed, new SingValueOptionParser<>(whatever, parse).parse(asList("-p", "8080"), option("p")));
+        assertEquals(parsed, SingValueOptionParser.createSingValueOptionParser(whatever, parse).parse(asList("-p", "8080"), option("p")));
     }
 }

@@ -391,7 +391,7 @@ Bad Smell ： 我们选择的实现方式本身就是一种不直观的方法，
 
 
 
-## 重组代码结构
+## 重组代码结构--让上下文相关的部分放到一起
 
 问题：BooleanOptionParser 依赖的 values 方法的实现在 SingValueOptionParser 里面。
 
@@ -419,4 +419,25 @@ Step1 ：**脱离对 BooleanOptionParser 对依赖**。
 
 
 
-Step2:
+Step2: **在工厂方法里面 做手术。**
+
+1. 修改实现方式：在工厂方法里面 使用匿名函数进行实现。
+
+
+
+Step3：工厂方法改名
+
+
+
+Step4: 搬移工厂方法 move member 
+
+
+
+## 代码风格不一致问题
+
+一个是继承的实现方式，一个是 lambda 的实现方式。 
+
+![image-20241110211715615](./img/image-20241110211715615.png)
+
+
+
