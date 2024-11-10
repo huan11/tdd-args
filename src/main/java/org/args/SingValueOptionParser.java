@@ -23,6 +23,13 @@ class SingValueOptionParser<T> implements OptionParser<T> {
         Optional<List<String>> argumentList;
         int expectedSize = 1;
 
+        argumentList = values(arguments, option, expectedSize);
+
+        return argumentList.map(it -> parseValue(it.get(0))).orElse(defaultValue);
+    }
+
+    private static Optional<List<String>> values(List<String> arguments, Option option, int expectedSize) {
+        Optional<List<String>> argumentList;
         int index = arguments.indexOf("-" + option.value());
         if (index == -1) {
             argumentList = Optional.empty();
@@ -36,8 +43,7 @@ class SingValueOptionParser<T> implements OptionParser<T> {
             argumentList = Optional.of(values);
 
         }
-
-        return argumentList.map(it -> parseValue(it.get(0))).orElse(defaultValue);
+        return argumentList;
     }
 
     private T parseValue(String value) {
