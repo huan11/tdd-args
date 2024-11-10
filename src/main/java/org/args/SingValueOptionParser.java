@@ -30,6 +30,10 @@ class SingValueOptionParser<T> implements OptionParser<T> {
     @Override
     public T parse(List<String> arguments, Option option) {
 
+        return getT(arguments, option, valueParser, defaultValue);
+    }
+
+    private static <T> T getT(List<String> arguments, Option option, Function<String, T> valueParser, T defaultValue) {
         return values(arguments, option, 1).map(it -> parseValue(it.get(0), valueParser)).orElse(defaultValue);
     }
 
