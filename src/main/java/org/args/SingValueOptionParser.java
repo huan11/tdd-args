@@ -16,10 +16,6 @@ class SingValueOptionParser<T> implements OptionParser<T> {
         this.valueParser = valueParser;
     }
 
-    public static <T> SingValueOptionParser<T> createSingValueOptionParser(Function<String, T> valueParser, T defalutValue) {
-        return new SingValueOptionParser<T>(defalutValue, valueParser);
-    }
-
     @Override
     public T parse(List<String> arguments, Option option) {
         int index = arguments.indexOf("-" + option.value());

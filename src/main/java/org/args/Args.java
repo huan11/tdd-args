@@ -1,10 +1,12 @@
 package org.args;
 
+import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 public class Args {
 
@@ -29,8 +31,8 @@ public class Args {
 
     private static Map<Class<?>, OptionParser> PARSERS = Map.of(
             boolean.class, new BooleanOptionParser(),
-            int.class, SingValueOptionParser.createSingValueOptionParser(Integer::parseInt, 0),
-            String.class, SingValueOptionParser.createSingValueOptionParser(String::valueOf, 0)
+            int.class, new SingValueOptionParser<Integer>(0, Integer::parseInt),
+            String.class, new SingValueOptionParser<Serializable>((Serializable) 0, (Function<String, ? extends Serializable>) String::valueOf)
     );
 
 }
