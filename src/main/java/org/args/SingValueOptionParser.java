@@ -22,7 +22,7 @@ class SingValueOptionParser<T> implements OptionParser<T> {
                 values(arguments, option, 0).map(it -> true).orElse(false));
     }
 
-    public static <T> OptionParser<T> createSingValueOptionParser(T defaultValue, Function<String, T> valueParser) {
+    public static <T> OptionParser<T> unary(T defaultValue, Function<String, T> valueParser) {
         return ((arguments, option) -> values(arguments, option, 1).map(it -> parseValue(it.get(0), valueParser)).orElse(defaultValue));
     }
 
