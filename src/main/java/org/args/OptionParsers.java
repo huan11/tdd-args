@@ -6,6 +6,7 @@ import org.args.exceptions.TooManyArgumentsException;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 import java.util.stream.IntStream;
 
 class OptionParsers {
@@ -18,8 +19,16 @@ class OptionParsers {
         return ((arguments, option) -> values(arguments, option, 1).map(it -> parseValue(it.get(0), valueParser)).orElse(defaultValue));
     }
 
-    public static <T> OptionParser<T[]> list(Function<String, T> valueParser) {
-        return null;
+    public static <T> OptionParser<T[]> list(IntFunction<T[]> generator, Function<String, T> valueParser) {
+        return (arguments, option) -> values(arguments, option)
+                .map(it -> it.stream().map(value -> parseValue(value, valueParser))
+                        .toArray(generator)).orElse(generator.apply(0));
+
+    }
+
+    private static Optional<List<String>> values(List<String> arguments, Option option) {
+        int index = arguments.indexOf("-" + option.value());
+        return Optional.ofNullable(index == -1 ? null : getValuesBetweenCurrentAndNextFlag(arguments, index));
     }
 
     private static Optional<List<String>> values(List<String> arguments, Option option, int expectedSize) {
