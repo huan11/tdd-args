@@ -23,7 +23,7 @@ class SingValueOptionParser<T> implements OptionParser<T> {
     }
 
     public static <T> OptionParser<T> createSingValueOptionParser(T defaultValue, Function<String, T> valueParser) {
-        return new SingValueOptionParser<T>(defaultValue, valueParser);
+        return ((arguments, option) -> getT(arguments, option, valueParser, defaultValue));
     }
 
 
