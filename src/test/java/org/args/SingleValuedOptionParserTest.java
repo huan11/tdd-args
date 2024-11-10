@@ -40,8 +40,12 @@ public class SingleValuedOptionParserTest {
 
     @Test // Default value
     public void should_set_default_value_to_zero_for_int_option() {
+        // 任意的实现
         Function<String, Object> whatever = (it) -> null;
-        assertEquals(0, new SingValueOptionParser<>(0, whatever).parse(asList(), option("p")));
+        // 任意的 default value
+        Object defaultValue = new Object();
+        // 意图更加明显，无论你是啥，保证最终的 defaultValue 一致，和 任何具体的 parser 实现whatever 没有关系
+        assertEquals(defaultValue, new SingValueOptionParser<>(defaultValue, whatever).parse(asList(), option("p")));
     }
 
     @Test // Happy path
