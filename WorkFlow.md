@@ -12,7 +12,7 @@
 
      样例一： `-l -p 8080 -d /usr/logs`
 
-     样例二：`-g this is a list -d 1 2-3 5`
+     样例二（列表参数）：`-g this is a list -d 1 2-3 5`
 
    * 输出：
 
@@ -454,3 +454,20 @@ Step4: 搬移工厂方法 move member
 
 
 使用 Junit 5 的 nested test 进行
+
+
+
+## 列表参数需求  example2 
+
+//TODO: -g this is a list -d 1 2 -3 5
+
+### 任务分解--任务列表
+
+//TODO: -g "this" "is" {"this", is"}
+//TODO: default value []
+//TODO: -d a throw exception
+
+
+
+
+

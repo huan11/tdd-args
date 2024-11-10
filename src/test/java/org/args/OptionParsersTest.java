@@ -96,7 +96,9 @@ public class OptionParsersTest {
 
     @Nested
     class ListOptionParser {
-        //
+        //TODO: -g "this" "is" {"this", is"}
+        //TODO: default value []
+        //TODO: -d a throw exception
     }
 
 
