@@ -441,3 +441,16 @@ Step4: 搬移工厂方法 move member
 
 
 
+### 将方法变成 private static -- introduce parameter
+
+
+
+
+
+
+
+## 合并类之后，测试名字略微不合适
+
+
+
+使用 Junit 5 的 nested test 进行
