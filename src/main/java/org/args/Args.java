@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class Args {
 
-    public static <T> T parse(Class<T> optionsClass, String... args){
-        try{
+    public static <T> T parse(Class<T> optionsClass, String... args) {
+        try {
             List<String> arguments = Arrays.asList(args);
             // get first constructor（eg:for boolean record, it shld be public BooleanOption(@Option("l")boolean logging){ ）
             Constructor<?> constructor = optionsClass.getDeclaredConstructors()[0];
@@ -17,7 +17,7 @@ public class Args {
             Object[] values = Arrays.stream(constructor.getParameters()).map((it) -> parseOption(it, arguments)).toArray();
 
             return (T) constructor.newInstance(values);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -29,8 +29,8 @@ public class Args {
 
     private static Map<Class<?>, OptionParser> PARSERS = Map.of(
             boolean.class, new BooleanOptionParser(),
-            int.class, new SingValueOptionParser<>(Integer::parseInt),
-            String.class, new SingValueOptionParser<>(String::valueOf)
+            int.class, SingValueOptionParser.createSingValueOptionParser(Integer::parseInt),
+            String.class, SingValueOptionParser.createSingValueOptionParser(String::valueOf)
     );
 
 }
