@@ -12,7 +12,6 @@ import java.lang.annotation.Annotation;
 import java.util.function.Function;
 
 import static java.util.Arrays.asList;
-import static org.args.OptionParsersTest.BooleanOptionParser.option;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -93,19 +92,25 @@ public class OptionParsersTest {
         public void should_set_value_to_true_if_present() {
             assertTrue(OptionParsers.bool().parse(asList("-l"), option("l")));
         }
+    }
 
-        static Option option(String value) {
-            return new Option() {
-                @Override
-                public Class<? extends Annotation> annotationType() {
-                    return Option.class;
-                }
+    @Nested
+    class ListOptionParser {
+        //
+    }
 
-                @Override
-                public String value() {
-                    return value;
-                }
-            };
-        }
+
+    static Option option(String value) {
+        return new Option() {
+            @Override
+            public Class<? extends Annotation> annotationType() {
+                return Option.class;
+            }
+
+            @Override
+            public String value() {
+                return value;
+            }
+        };
     }
 }
