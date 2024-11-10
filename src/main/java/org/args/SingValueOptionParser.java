@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 class SingValueOptionParser<T> implements OptionParser<T> {
     Function<String, T> valueParser;
+    T defaultValue;
 
     public SingValueOptionParser(Function<String, T> valueParser) {
         this.valueParser = valueParser;
@@ -13,7 +14,7 @@ class SingValueOptionParser<T> implements OptionParser<T> {
     @Override
     public T parse(List<String> arguments, Option option) {
         int index = arguments.indexOf("-" + option.value());
-        if (index == -1) return 0;
+        if (index == -1) return defaultValue;
         if (index + 1 == arguments.size() || arguments.get(index + 1).startsWith("-"))
             throw new InsufficientArgumentsException(option.value());
         if (index + 2 < arguments.size() &&
