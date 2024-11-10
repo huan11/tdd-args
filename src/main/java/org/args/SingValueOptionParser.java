@@ -11,6 +11,11 @@ class SingValueOptionParser<T> implements OptionParser<T> {
         this.valueParser = valueParser;
     }
 
+    public SingValueOptionParser(T defaultValue,Function<String, T> valueParser,) {
+        this.defaultValue = defaultValue;
+        this.valueParser = valueParser;
+    }
+
     @Override
     public T parse(List<String> arguments, Option option) {
         int index = arguments.indexOf("-" + option.value());
