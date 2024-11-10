@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static java.util.Arrays.asList;
 import static org.args.BooleanOptionParserTest.option;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SingleValuedOptionParserTest {
@@ -35,4 +35,9 @@ public class SingleValuedOptionParserTest {
         assertEquals("p", e.getOption());
     }
 
+
+    @Test
+    public void should_set_default_value_to_zero_for_int_option() {
+        assertEquals(0, new SingValueOptionParser<>(Integer::parseInt).parse(asList(), option("p")));
+    }
 }
