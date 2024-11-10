@@ -5,13 +5,12 @@ import org.junit.jupiter.api.Test;
 import java.lang.annotation.Annotation;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BooleanOptionParserTest {
-    // Sad path
-    @Test
+
+    @Test // Sad path
     public void should_not_accept_extra_argument_for_boolean_option() {
         // Assert
         TooManyArgumentsException e = assertThrows(TooManyArgumentsException.class, () -> {
@@ -23,9 +22,16 @@ public class BooleanOptionParserTest {
         assertEquals("l", e.getOption());
     }
 
-    @Test
+
+    @Test // Default value
     public void should_set_default_value_to_false_if_not_present() {
         assertFalse(new BooleanOptionParser().parse(asList(), option("l")));
+    }
+
+
+    @Test // Happy path
+    public void should_set_value_to_true_if_present() {
+        assertTrue(new BooleanOptionParser().parse(asList("-l"), option("l")));
     }
 
     static Option option(String value) {

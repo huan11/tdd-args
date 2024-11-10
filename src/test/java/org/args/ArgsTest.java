@@ -1,37 +1,29 @@
 package org.args;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class ArgsTest {
-    // Single Option:
-    static record BooleanOption(@Option("l")boolean logging){}
-    @Test
-    public void should_set_boolean_option_to_true_if_flag_present() {
-        BooleanOption options = Args.parse(BooleanOption.class, "-l");
-        assertTrue(options.logging());
-    }
-    @Test
-    public void should_set_boolean_option_to_false_if_flag_not_present() {
-        BooleanOption options = Args.parse(BooleanOption.class);
-        assertFalse(options.logging());
+    static record IntOption(@Option("p") int port) {
     }
 
-    static record IntOption(@Option("p") int port){}
     @Test
-    public void should_parse_int_as_option_value(){
+    public void should_parse_int_as_option_value() {
         // execute
         IntOption option = Args.parse(IntOption.class, "-p", "8080");
         // assert option value shld be equal to 8080
         assertEquals(8080, option.port());
     }
 
-    static record StringOption(@Option("d") String directory){}
+    static record StringOption(@Option("d") String directory) {
+    }
+
     @Test
-    public void should_parse_string_as_option_value(){
+    public void should_parse_string_as_option_value() {
         // execute
         StringOption option = Args.parse(StringOption.class, "-d", "/usr/logs");
         // assert
@@ -40,8 +32,9 @@ public class ArgsTest {
 
     static record MultiOptions(@Option("l") boolean logging, @Option("p") int port, @Option("d") String directory) {
     }
+
     @Test
-    public void should_parse_multi_options(){
+    public void should_parse_multi_options() {
         MultiOptions options = Args.parse(MultiOptions.class, "-l", "-p", "8080", "-d", "/use/logs");
         assertTrue(options.logging());
         assertEquals(8080, options.port());
@@ -73,6 +66,6 @@ public class ArgsTest {
     }
 
 
-
-    static record ListOption(@Option("-g") String[] group, @Option("-d") int[] decimals){}
+    static record ListOption(@Option("-g") String[] group, @Option("-d") int[] decimals) {
+    }
 }
