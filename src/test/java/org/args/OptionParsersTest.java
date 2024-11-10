@@ -14,8 +14,7 @@ import java.util.function.Function;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OptionParsersTest {
     @Nested
@@ -97,6 +96,11 @@ public class OptionParsersTest {
     @Nested
     class ListOptionParser {
         //TODO: -g "this" "is" {"this", is"}
+        @Test
+        public void should_parse_list_value() {
+            String[] value = OptionParsers.list(String::valueOf).parse(asList("-g", "this", "is"), option("g"));
+            assertArrayEquals(new String[]{"this", "is"}, value);
+        }
         //TODO: default value []
         //TODO: -d a throw exception
     }

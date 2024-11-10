@@ -457,7 +457,7 @@ Step4: 搬移工厂方法 move member
 
 
 
-## 列表参数需求  example2 
+# 列表参数需求  example2 
 
 //TODO: -g this is a list -d 1 2 -3 5
 
@@ -468,6 +468,14 @@ Step4: 搬移工厂方法 move member
 //TODO: -d a throw exception
 
 
+
+## 设计函数签名
+
+```
+public static <T> OptionParser<T[]> list(Function<String, T> valueParser) {
+    return null;
+}
+```
 
 
 
