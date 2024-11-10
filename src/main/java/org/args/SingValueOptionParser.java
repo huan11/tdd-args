@@ -29,7 +29,7 @@ class SingValueOptionParser<T> implements OptionParser<T> {
         return valueParser.apply(values.get(0));
     }
 
-    private static List<String> getValuesBetweenCurrentAndNextFlag(List<String> arguments, int index) {
+    static List<String> getValuesBetweenCurrentAndNextFlag(List<String> arguments, int index) {
 
         return arguments.subList(index + 1, IntStream.range(index + 1, arguments.size())
                 .filter(it -> arguments.get(it).startsWith("-"))
