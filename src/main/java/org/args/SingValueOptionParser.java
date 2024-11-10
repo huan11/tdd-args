@@ -1,5 +1,8 @@
 package org.args;
 
+import org.args.exceptions.InsufficientArgumentsException;
+import org.args.exceptions.TooManyArgumentsException;
+
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.IntStream;
@@ -21,20 +24,16 @@ class SingValueOptionParser<T> implements OptionParser<T> {
 
         List<String> values = getValuesBetweenCurrentAndNextFlag(arguments, index);
 
-        if (values.size() < 1)
-            throw new InsufficientArgumentsException(option.value());
-        if (values.size() > 1)
-            throw new TooManyArgumentsException(option.value());
-        return valueParser.apply(arguments.get(index + 1));
+        if (values.size() < 1) throw new InsufficientArgumentsException(option.value());
+        if (values.size() > 1) throw new TooManyArgumentsException(option.value());
+        return valueParser.apply(values.get(0));
     }
 
     private static List<String> getValuesBetweenCurrentAndNextFlag(List<String> arguments, int index) {
-        int followingFlagIndex = IntStream.range(index + 1, arguments.size())
-                .filter(it -> arguments.get(it).startsWith("-"))
-                .findFirst().orElse(arguments.size());
 
-        List<String> values = arguments.subList(index + 1, followingFlagIndex);
-        return values;
+        return arguments.subList(index + 1, IntStream.range(index + 1, arguments.size())
+                .filter(it -> arguments.get(it).startsWith("-"))
+                .findFirst().orElse(arguments.size()));
     }
 
 }

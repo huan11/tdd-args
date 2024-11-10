@@ -1,5 +1,6 @@
 package org.args;
 
+import org.args.exceptions.IllegalOptionException;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

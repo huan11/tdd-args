@@ -1,4 +1,4 @@
-package org.args;
+package org.args.exceptions;
 
 public class TooManyArgumentsException extends RuntimeException {
     private final String option;
