@@ -389,3 +389,34 @@ Bad Smell ： 我们选择的实现方式本身就是一种不直观的方法，
 
 
 
+
+
+## 重组代码结构
+
+问题：BooleanOptionParser 依赖的 values 方法的实现在 SingValueOptionParser 里面。
+
+思路：
+
+1. 使用 基类进行重组，代码编程继承结构
+
+2. 利用新的 java 语法
+
+   BooleanOptionParser的 接口 OptionParser 是一个只有一个方法的接口，可以转成一个 lambda
+
+   而BooleanOptionParser 可以用一个匿名的 lambda 函数代表整个类
+
+
+
+
+
+
+
+Step1 ：**脱离对 BooleanOptionParser 对依赖**。
+
+生成 构造函数
+工厂方法替代构造函数
+尽可能使用 interface
+
+
+
+Step2:
