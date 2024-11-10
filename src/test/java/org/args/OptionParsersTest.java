@@ -127,17 +127,17 @@ public class OptionParsersTest {
         }
 
         //TODO: -d a throw exception
-//        @Test
-//        public void should_throw_exception_if_value_parser_cant_parse_value() {
-//            Function<String, String> parser = (it) -> {
-//                throw new RuntimeException();
-//            };
-//            IllegalValueException e = assertThrows(IllegalValueException.class, () ->
-//                    OptionParsers.list(String[]::new, parser).parse(asList("-g", "this", "is"), option("g")));
-//
-//            assertEquals("g", e.getOption());
-//            assertEquals("this", e.getValue());
-//        }
+        @Test
+        public void should_throw_exception_if_value_parser_cant_parse_value() {
+            Function<String, String> parser = (it) -> {
+                throw new RuntimeException();
+            };
+            IllegalValueException e = assertThrows(IllegalValueException.class, () ->
+                    OptionParsers.list(String[]::new, parser).parse(asList("-g", "this", "is"), option("g")));
+
+            assertEquals("g", e.getOption());
+            assertEquals("this", e.getValue());
+        }
     }
 
 
