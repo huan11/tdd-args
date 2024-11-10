@@ -359,7 +359,7 @@ Bad Smell ： 我们选择的实现方式本身就是一种不直观的方法，
 
 * 通过取到下一个标志位的下标后，将参数不足和参数过多的问题转化为当前标志位到下一个标志位之间元素个数的问题 （< 1 , 不足； > 1 , 多了）
 
-## 审计代码坏味道
+## 审视代码坏味道-实现方式可以复用
 
 这两个代码可以用同一个实现方式 getValuesBetweenCurrentAndNextFlag
 
@@ -370,3 +370,36 @@ Bad Smell ： 我们选择的实现方式本身就是一种不直观的方法，
 效果
 
 ![image-20241110200614530](./img/image-20241110200614530.png)
+
+## 审视代码坏味道--相同的结构
+
+![image-20241110201055706](./img/image-20241110201055706.png)
+
+
+
+重构方式：使用 Optional 改造
+
+```
+@Override
+    public T parse(List<String> arguments, Option option) {
+        Optional<List<String>> argumentList;
+
+        int index = arguments.indexOf("-" + option.value());
+        if (index == -1) {
+            argumentList = Optional.empty();
+        } else {
+            List<String> values = getValuesBetweenCurrentAndNextFlag(arguments, index);
+
+            if (values.size() < 1) throw new InsufficientArgumentsException(option.value());
+            if (values.size() > 1) throw new TooManyArgumentsException(option.value());
+
+            argumentList = Optional.of(values);
+
+        }
+
+        return argumentList.map(it -> parseValue(it.get(0 ))).orElse(defaultValue);
+    }
+```
+
+
+
