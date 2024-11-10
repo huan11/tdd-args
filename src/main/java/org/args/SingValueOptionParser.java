@@ -23,16 +23,19 @@ class SingValueOptionParser<T> implements OptionParser<T> {
         Optional<List<String>> argumentList;
 
         int index = arguments.indexOf("-" + option.value());
-        if (index == -1) return defaultValue;
+        if (index == -1) {
+            argumentList = Optional.empty();
+        } else {
+            List<String> values = getValuesBetweenCurrentAndNextFlag(arguments, index);
 
-        List<String> values = getValuesBetweenCurrentAndNextFlag(arguments, index);
+            if (values.size() < 1) throw new InsufficientArgumentsException(option.value());
+            if (values.size() > 1) throw new TooManyArgumentsException(option.value());
 
-        if (values.size() < 1) throw new InsufficientArgumentsException(option.value());
-        if (values.size() > 1) throw new TooManyArgumentsException(option.value());
+            argumentList = Optional.of(values);
 
+        }
 
-        String value = values.get(0);
-        return parseValue(value);
+        return argumentList.map(it -> parseValue(it.get(0))).orElse(defaultValue);
     }
 
     private T parseValue(String value) {
