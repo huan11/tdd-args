@@ -50,6 +50,9 @@ public class SingleValuedOptionParserTest {
 
     @Test // Happy path
     public void should_parse_value_if_flag_present() {
-        assertEquals(8080, new SingValueOptionParser<Integer>(0, Integer::parseInt).parse(asList("-p", "8080"), option("p")));
+        Object parsed = new Object();
+        Function<String, Object> parse = (it) -> parsed;
+        Object whatever = new Object();
+        assertEquals(parsed, new SingValueOptionParser<>(whatever, parse).parse(asList("-p", "8080"), option("p")));
     }
 }
