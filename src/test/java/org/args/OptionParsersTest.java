@@ -1,5 +1,6 @@
 package org.args;
 
+import org.args.exceptions.IllegalValueException;
 import org.args.exceptions.InsufficientArgumentsException;
 import org.args.exceptions.TooManyArgumentsException;
 import org.junit.Assert;
@@ -62,6 +63,24 @@ public class OptionParsersTest {
             Object whatever = new Object();
             assertEquals(parsed, OptionParsers.unary(whatever, parse).parse(asList("-p", "8080"), option("p")));
         }
+
+        @Test // Sad path - Illegal value format
+        public void should_raise_exception_if_illegal_value_format() {
+            // Arrange: Create a dummy parser that throws an exception for any input
+            Object whatever = new Object();
+            Function<String, Object> parse = (it) -> {
+                throw new RuntimeException("Invalid value format");
+            };
+
+            // Act & Assert: Expect an IllegalValueException when parsing
+            IllegalValueException e = assertThrows(IllegalValueException.class, () ->
+                    OptionParsers.unary(whatever, parse).parse(asList("-p", "8080"), option("p"))
+            );
+
+            // Verify that the exception contains the correct option and value information
+            assertEquals("p", e.getOption());
+            assertEquals("8080", e.getValue());
+        }
     }
 
 
@@ -95,14 +114,30 @@ public class OptionParsersTest {
 
     @Nested
     class ListOptionParser {
-        //TODO: -g "this" "is" {"this", is"}
         @Test
         public void should_parse_list_value() {
             String[] value = OptionParsers.list(String[]::new, String::valueOf).parse(asList("-g", "this", "is"), option("g"));
             assertArrayEquals(new String[]{"this", "is"}, value);
         }
-        //TODO: default value []
+
+        @Test
+        public void should_use_empty_array_as_default_value() {
+            String[] value = OptionParsers.list(String[]::new, String::valueOf).parse(asList(), option("g"));
+            assertEquals(0, value.length);
+        }
+
         //TODO: -d a throw exception
+//        @Test
+//        public void should_throw_exception_if_value_parser_cant_parse_value() {
+//            Function<String, String> parser = (it) -> {
+//                throw new RuntimeException();
+//            };
+//            IllegalValueException e = assertThrows(IllegalValueException.class, () ->
+//                    OptionParsers.list(String[]::new, parser).parse(asList("-g", "this", "is"), option("g")));
+//
+//            assertEquals("g", e.getOption());
+//            assertEquals("this", e.getValue());
+//        }
     }
 
 
