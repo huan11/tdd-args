@@ -277,7 +277,7 @@ Mark the Task as finished
   * // TODO:      - int : 0
   * // TODO:      - string ""
 
-## 调整任务列表
+## New 调整任务列表
 
 架构调整了，任务列表也要跟着动
 
@@ -299,3 +299,10 @@ Mark the Task as finished
 
 
 
+## 进入红绿循环
+
+![image-20241110111535000](./img/image-20241110111535000.png)
+
+但是引起了另外一个测试的超界
+
+![image-20241110111935401](./img/image-20241110111935401.png)
