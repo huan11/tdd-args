@@ -21,6 +21,7 @@ class SingValueOptionParser<T> implements OptionParser<T> {
     @Override
     public T parse(List<String> arguments, Option option) {
         Optional<List<String>> argumentList;
+        int expectedSize = 1;
 
         int index = arguments.indexOf("-" + option.value());
         if (index == -1) {
@@ -28,8 +29,9 @@ class SingValueOptionParser<T> implements OptionParser<T> {
         } else {
             List<String> values = getValuesBetweenCurrentAndNextFlag(arguments, index);
 
-            if (values.size() < 1) throw new InsufficientArgumentsException(option.value());
-            if (values.size() > 1) throw new TooManyArgumentsException(option.value());
+
+            if (values.size() < expectedSize) throw new InsufficientArgumentsException(option.value());
+            if (values.size() > expectedSize) throw new TooManyArgumentsException(option.value());
 
             argumentList = Optional.of(values);
 
