@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.function.Function;
+
 import static java.util.Arrays.asList;
 import static org.args.BooleanOptionParserTest.option;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,9 +40,9 @@ public class SingleValuedOptionParserTest {
 
     @Test // Default value
     public void should_set_default_value_to_zero_for_int_option() {
-        assertEquals(0, new SingValueOptionParser<Integer>(0, Integer::parseInt).parse(asList(), option("p")));
+        Function<String, Object> whatever = (it) -> null;
+        assertEquals(0, new SingValueOptionParser<>(0, whatever).parse(asList(), option("p")));
     }
-
 
     @Test // Happy path
     public void should_parse_value_if_flag_present() {
