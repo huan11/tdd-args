@@ -3,8 +3,7 @@ package org.args;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ArgsTest {
@@ -17,6 +16,20 @@ public class ArgsTest {
         assertTrue(options.logging());
         assertEquals(8080, options.port());
         assertEquals("/use/logs", options.directory());
+    }
+
+    // Options without port annotation
+    static record OptionsWithoutAnnotation(@Option("l") boolean logging, int port, @Option("d") String directory) {
+    }
+
+    @Test
+    //should throw illegal option exception if annotation not present.
+    public void should_throw_illegal_option_exception_if_annotation_not_present() {
+        IllegalOptionException e = assertThrows(IllegalOptionException.class, () -> {
+            Args.parse(OptionsWithoutAnnotation.class, "-l", "-p", "8080", "-d", "/use/logs");
+        });
+
+        assertEquals("port", e.getParameter());
     }
 
     // example2 `-g this is a list -d 1 2 -3 5` GPT 生成
