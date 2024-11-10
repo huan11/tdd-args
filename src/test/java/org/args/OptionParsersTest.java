@@ -13,7 +13,7 @@ import static org.args.BooleanOptionParserTest.option;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class SingleValuedOptionParserTest {
+public class OptionParsersTest {
     @Test //Sad path
     public void should_not_accept_extra_argument_for_single_valued_option() {
         // Assert
