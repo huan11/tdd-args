@@ -15,7 +15,7 @@ public class SingleValuedOptionParserTest {
         // Assert
         TooManyArgumentsException e = assertThrows(TooManyArgumentsException.class, () -> {
             // Act
-            SingValueOptionParser.createSingValueOptionParser(Integer::parseInt).parse(asList("-p", "8080", "8081"), option("p"));
+            SingValueOptionParser.createSingValueOptionParser(Integer::parseInt, 0).parse(asList("-p", "8080", "8081"), option("p"));
         });
 
         // Assert
@@ -28,7 +28,7 @@ public class SingleValuedOptionParserTest {
         // Assert
         InsufficientArgumentsException e = assertThrows(InsufficientArgumentsException.class, () -> {
             // Act
-            SingValueOptionParser.createSingValueOptionParser(Integer::parseInt).parse(asList(arguments.split(" ")), option("p"));
+            SingValueOptionParser.createSingValueOptionParser(Integer::parseInt, 0).parse(asList(arguments.split(" ")), option("p"));
         });
 
         // Assert
@@ -38,6 +38,6 @@ public class SingleValuedOptionParserTest {
 
     @Test
     public void should_set_default_value_to_zero_for_int_option() {
-        assertEquals(0, SingValueOptionParser.createSingValueOptionParser(Integer::parseInt).parse(asList(), option("p")));
+        assertEquals(0, SingValueOptionParser.createSingValueOptionParser(Integer::parseInt, 0).parse(asList(), option("p")));
     }
 }

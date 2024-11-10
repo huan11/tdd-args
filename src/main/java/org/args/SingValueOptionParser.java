@@ -16,8 +16,8 @@ class SingValueOptionParser<T> implements OptionParser<T> {
         this.valueParser = valueParser;
     }
 
-    public static <T> SingValueOptionParser<T> createSingValueOptionParser(Function<String, T> valueParser) {
-        return new SingValueOptionParser<T>(valueParser);
+    public static <T> SingValueOptionParser<T> createSingValueOptionParser(Function<String, T> valueParser, T defalutValue) {
+        return new SingValueOptionParser<T>(defalutValue, valueParser);
     }
 
     @Override
