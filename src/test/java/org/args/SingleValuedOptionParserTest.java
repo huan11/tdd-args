@@ -40,4 +40,17 @@ public class SingleValuedOptionParserTest {
     public void should_set_default_value_to_zero_for_int_option() {
         assertEquals(0, new SingValueOptionParser<Integer>(0, Integer::parseInt).parse(asList(), option("p")));
     }
+
+
+    @Test
+    public void should_not_accept_extra_argument_for_string_single_valued_option() {
+        // Assert
+        TooManyArgumentsException e = assertThrows(TooManyArgumentsException.class, () -> {
+            // Act
+            new SingValueOptionParser<String>("", String::valueOf).parse(asList("-d", "usr/logs", "usr/vars"), option("d"));
+        });
+
+        // Assert
+        assertEquals("d", e.getOption());
+    }
 }
