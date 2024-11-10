@@ -2,9 +2,9 @@ package org.args;
 
 import java.util.List;
 
-class BooleanOptionParser implements OptionParser {
+class BooleanOptionParser implements OptionParser<Boolean> {
     @Override
-    public Object parse(List<String> arguments, Option option) {
+    public Boolean parse(List<String> arguments, Option option) {
         // If the flag is present, the value is true, otherwise false
         int index = arguments.indexOf("-" + option.value());
         // 考虑越界的问题
