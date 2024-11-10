@@ -379,27 +379,13 @@ Bad Smell ： 我们选择的实现方式本身就是一种不直观的方法，
 
 重构方式：使用 Optional 改造
 
-```
-@Override
-    public T parse(List<String> arguments, Option option) {
-        Optional<List<String>> argumentList;
+![image-20241110203017210](./img/image-20241110203017210.png)
 
-        int index = arguments.indexOf("-" + option.value());
-        if (index == -1) {
-            argumentList = Optional.empty();
-        } else {
-            List<String> values = getValuesBetweenCurrentAndNextFlag(arguments, index);
 
-            if (values.size() < 1) throw new InsufficientArgumentsException(option.value());
-            if (values.size() > 1) throw new TooManyArgumentsException(option.value());
 
-            argumentList = Optional.of(values);
+提取成方法后，移除变量，去掉 else
 
-        }
-
-        return argumentList.map(it -> parseValue(it.get(0 ))).orElse(defaultValue);
-    }
-```
+![image-20241110204144657](./img/image-20241110204144657.png)
 
 
 
