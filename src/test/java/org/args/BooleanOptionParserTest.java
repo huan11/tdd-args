@@ -6,6 +6,7 @@ import java.lang.annotation.Annotation;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BooleanOptionParserTest {
@@ -20,6 +21,11 @@ public class BooleanOptionParserTest {
 
         // Assert
         assertEquals("l", e.getOption());
+    }
+
+    @Test
+    public void should_set_default_value_to_false_if_not_present() {
+        assertFalse((Boolean) new BooleanOptionParser().parse(asList(), option("l")));
     }
 
     static Option option(String value) {
