@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BooleanOptionParserTest {
     // Sad path
-    // TODO: -bool -l t / -l t f
     @Test
     public void should_not_accept_extra_argument_for_boolean_option() {
         // Assert
@@ -23,7 +22,20 @@ public class BooleanOptionParserTest {
         assertEquals("l", e.getOption());
     }
 
-    static Option option(String value){
+    @Test
+    public void should_not_accept_extra_arguments_for_boolean_option() {
+        // Assert
+        TooManyArgumentsException e = assertThrows(TooManyArgumentsException.class, () -> {
+            // Act
+            new BooleanOptionParser().parse(asList("-l", "t", "f"), option("l"));
+        });
+
+        // Assert
+        assertEquals("l", e.getOption());
+    }
+
+
+    static Option option(String value) {
         return new Option() {
             @Override
             public Class<? extends Annotation> annotationType() {
