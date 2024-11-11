@@ -479,3 +479,10 @@ public static <T> OptionParser<T[]> list(Function<String, T> valueParser) {
 
 
 
+## 补充一个测试
+
+```
+[ListOptionParser][should_use_empty_array_as_default_value][red-已经实现了]
+```
+
+  
